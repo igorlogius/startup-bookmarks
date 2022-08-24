@@ -10,14 +10,13 @@
   },
   "browser_action": {
   },
-  "description": "",
   "manifest_version": 2,
-  "name": "startup-tabs",
+  "name": "Startup Tabs",
   "permissions": [
     "tabs",
     "menus",
     "bookmarks",
     "storage"
   ],
-  "version": "1.2.4"
+  "version": "1.2.5"
 }

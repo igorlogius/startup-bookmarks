@@ -1,6 +1,5 @@
 /* global browser */
 
-//const temporary = browser.runtime.id.endsWith('@temporary-addon'); // debugging?
 const manifest = browser.runtime.getManifest();
 const extname = manifest.name;
 
@@ -11,15 +10,11 @@ async function openStartupTabs(){
 		if (!tmp) { return; }
 
         let already_open_urls = new Set((await browser.tabs.query({})).filter( t => t.url ).map( t => t.url));
-        //console.log(JSON.stringify([...already_open_urls],null,4));
 
 		const urls = new Set((await browser.bookmarks.getChildren(tmp))
 			.filter( child => child.url) // ignore sub folders
 			.filter( child => !already_open_urls.has(child.url)) // ignore sub folders
 			.map( child => child.url));
-
-
-        //console.log(JSON.stringify([...urls],null,4));
 
 		let first = true;
         for(const url of urls) {
@@ -42,8 +37,6 @@ browser.menus.create({
 	checked: false,
 	onclick: async function(info/*, tab*/) {
 		if(info.bookmarkId ) {
-			//blub = { 'startup-tabs': info.bookmarkId }
-
 			let tmp = await browser.storage.local.get(extname);
 			if (tmp) {
 				tmp = tmp[extname];
@@ -69,5 +62,4 @@ browser.menus.onShown.addListener(async function(info/*, tab*/) {
 	browser.menus.refresh();
 });
 
-// debugging
 browser.browserAction.onClicked.addListener(openStartupTabs);
