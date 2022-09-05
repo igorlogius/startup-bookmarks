@@ -33,7 +33,7 @@ function onChange(evt) {
 
 }
 
-[ "window", "titlePreface" ].map( (id) => {
+[ "hideContextMenu", "window", "titlePreface" ].map( (id) => {
 
 	browser.storage.local.get(id).then( (obj) => {
 

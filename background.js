@@ -69,6 +69,10 @@ browser.menus.create({
 });
 
 browser.menus.onShown.addListener(async function(info/*, tab*/) {
+    const hideContextMenu = await getFromStorage('boolean', 'hideContextMenu', false);
+    if(hideContextMenu){
+		browser.menus.update(extname, {visible: false, checked: false});
+    }else
 	if(info.bookmarkId ) {
 		const bmn = (await browser.bookmarks.get(info.bookmarkId))[0];
 		if(!bmn.url) {
