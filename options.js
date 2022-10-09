@@ -8,7 +8,6 @@ function onChange(evt) {
 	let value = ( (el.type === 'checkbox') ? el.checked : el.value)
 	let obj = {}
 
-	//console.log(id,value, el.type,el.min);
 	if(value === ""){
 		return;
 	}
@@ -28,7 +27,6 @@ function onChange(evt) {
 
 	obj[id] = value;
 
-	console.log(id,value);
 	browser.storage.local.set(obj).catch(console.error);
 
 }
