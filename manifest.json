@@ -9,18 +9,16 @@
 	  "128": "icon.png"
   },
   "browser_action": {
+    "default_popup": "dialog.html"
   },
   "manifest_version": 2,
   "name": "Startup Tabs",
   "options_ui": {
-    "page": "options.html"
+    "page": "dialog.html"
   },
   "permissions": [
-    "notifications",
-    "tabs",
-    "menus",
     "bookmarks",
     "storage"
   ],
-  "version": "1.5.5"
+  "version": "1.6.5"
 }

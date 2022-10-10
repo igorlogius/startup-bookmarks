@@ -8,6 +8,11 @@ async function getFromStorage(type, id, fallback) {
     return (typeof tmp[id] === type) ? tmp[id] : fallback;
 }
 
+async function setToStorage(id, value) {
+    let obj = {};
+    obj[id] = value
+    return browser.storage.local.set(obj);
+}
 
 function notify(title, message = "", iconUrl = "icon.png") {
     return browser.notifications.create(""+Date.now(),
@@ -20,10 +25,9 @@ function notify(title, message = "", iconUrl = "icon.png") {
     );
 }
 
-
 async function openStartupTabs(){
 
-    const bmId = await getFromStorage('string', extname, undefined);
+    const bmId = await getFromStorage('string', 'folder', undefined);
     if(!bmId){
         notify(extname,'No bookmark folder selected!\nPlease select a bookmark folder!');
         return;
@@ -62,6 +66,7 @@ async function openStartupTabs(){
 
 browser.runtime.onStartup.addListener(openStartupTabs);
 
+/*
 browser.menus.create({
 	id: extname,
 	title: 'Open at Startup',
@@ -69,7 +74,7 @@ browser.menus.create({
 	contexts: ["bookmark"],
 	visible: false,
 	checked: false,
-	onclick: async function(info/*, tab*/) {
+	onclick: async function(info, tab) {
 		if(info.bookmarkId ) {
 			let tmp = await browser.storage.local.get(extname);
 			if (tmp) {
@@ -83,7 +88,7 @@ browser.menus.create({
 	}
 });
 
-browser.menus.onShown.addListener(async function(info/*, tab*/) {
+browser.menus.onShown.addListener(async function(info, tab) {
     const hideContextMenu = await getFromStorage('boolean', 'hideContextMenu', false);
     if(hideContextMenu){
 		browser.menus.update(extname, {visible: false, checked: false});
@@ -100,6 +105,34 @@ browser.menus.onShown.addListener(async function(info/*, tab*/) {
 	}
 	browser.menus.refresh();
 });
-
 browser.browserAction.onClicked.addListener(openStartupTabs);
+*/
+
+/*
+browser.browserAction.onClicked.addListener( () => {
+    browser.windows.create({
+        url: ["dialog.html"],
+        type: "popup",
+        width: 300,
+        height: 250
+    });
+});
+*/
+
+browser.runtime.onMessage.addListener( (req,sender, sendRes) => {
+        if(req.cmd === 'testStartupTabs') {
+            openStartupTabs();
+        }
+});
+
+async function onInstalled(details) {
+    if(details.reason === 'update') {
+        let tmp = await getFromStorage('string',extname, '');
+        if(typeof tmp !== ''){
+            setToStorage('folder',tmp);
+        }
+    }
+}
+
+browser.runtime.onInstalled.addListener(onInstalled);
 
