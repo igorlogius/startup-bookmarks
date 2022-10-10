@@ -14,22 +14,10 @@ async function setToStorage(id, value) {
     return browser.storage.local.set(obj);
 }
 
-function notify(title, message = "", iconUrl = "icon.png") {
-    return browser.notifications.create(""+Date.now(),
-        {
-           "type": "basic"
-            ,iconUrl
-            ,title
-            ,message
-        }
-    );
-}
-
 async function openStartupTabs(){
 
     const bmId = await getFromStorage('string', 'folder', undefined);
     if(!bmId){
-        notify(extname,'No bookmark folder selected!\nPlease select a bookmark folder!');
         return;
     }
     const openInNewWindow= await getFromStorage('boolean', 'window', false);
@@ -42,6 +30,9 @@ async function openStartupTabs(){
                 //.filter( child => !already_open_urls.has(child.url)) // ignore sub folders
                 .map( child => child.url));
 
+        if(urls.size< 1) {
+            return;
+        }
         if(openInNewWindow){
             const titlePreface = (await getFromStorage('string', 'titlePreface', extname)) + " : " ;
 
@@ -60,53 +51,11 @@ async function openStartupTabs(){
             }
         }
     }catch(e){
-        notify(extname,'Bookmark folder removed!\nPlease select a new bookmark folder!');
+        console.error(e);
     }
 }
 
 browser.runtime.onStartup.addListener(openStartupTabs);
-
-/*
-browser.menus.create({
-	id: extname,
-	title: 'Open at Startup',
-	type: "radio",
-	contexts: ["bookmark"],
-	visible: false,
-	checked: false,
-	onclick: async function(info, tab) {
-		if(info.bookmarkId ) {
-			let tmp = await browser.storage.local.get(extname);
-			if (tmp) {
-				tmp = tmp[extname];
-			}
-			let blub = {};
-			blub[extname] = (info.bookmarkId === tmp)? undefined: info.bookmarkId;
-			browser.storage.local.set(blub);
-            notify(extname,'Startup folder selected');
-		}
-	}
-});
-
-browser.menus.onShown.addListener(async function(info, tab) {
-    const hideContextMenu = await getFromStorage('boolean', 'hideContextMenu', false);
-    if(hideContextMenu){
-		browser.menus.update(extname, {visible: false, checked: false});
-    }else
-	if(info.bookmarkId ) {
-		const bmn = (await browser.bookmarks.get(info.bookmarkId))[0];
-		if(!bmn.url) {
-			let tmp = await browser.storage.local.get(extname);
-			if (tmp) { tmp = tmp[extname]; }
-			browser.menus.update(extname, {visible: true, checked: (tmp === info.bookmarkId)});
-		}else{
-			browser.menus.update(extname, {visible: false, checked: false});
-		}
-	}
-	browser.menus.refresh();
-});
-browser.browserAction.onClicked.addListener(openStartupTabs);
-*/
 
 /*
 browser.browserAction.onClicked.addListener( () => {

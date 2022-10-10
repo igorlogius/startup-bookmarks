@@ -90,12 +90,16 @@ async function initSelect() {
     for(const node of nodes){
         out = new Map([...out, ...recGetFolders(node, depth) ]);
     }
+    let tmp = await getFromStorage('string','folder','')
+    let last_val = '';
     for(const [k,v] of out){
         //console.debug(k, v.title);
         folders.add(new Option("-".repeat(v.depth) + " " + v.title, k))
+        if(k === tmp){
+            last_val = k;
+        }
     }
-    let tmp = await getFromStorage('string','folder','')
-    folder.value = tmp;
+    folder.value = last_val;
 }
 
 async function onLoad() {
