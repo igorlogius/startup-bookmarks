@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <title>Import Bookmarks from File</title>
-    <style>
-        body {
-            background-color: lightgray;
-        }
-        #folder {
-            width:100%;
-            text-align:center;
-        }
-        #test {
-            width:100%;
-            text-align:center;
-        }
-    </style>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<title>Import Bookmarks from File</title>
+	<style>
+	body {
+		background-color: lightgray;
+	}
+	#folder {
+		width:100%;
+		text-align:center;
+	}
+	#test {
+		width:100%;
+		text-align:center;
+	}
+	</style>
 </head>
 <body>
-    <fieldset>
-        <select id="folder">
-            <option value=''>Select Startup Folder</option>
-        </select>
-    </fieldset>
-<fieldset>
-  <label for="window">Window</label>
-  <input id="window" type="checkbox" />
-  <label for="titlePreface">Prefix</label>
-  <input id="titlePreface" type="text" value="Startup Tabs" />
-</fieldset>
-<fieldset>
-        <input id="test" type="button" value=" Test " disabled />
-</fieldset>
-    <script src="dialog.js"></script>
+	<fieldset>
+		<select id="folder">
+			<option value=''>Select Startup Folder</option>
+		</select>
+	</fieldset>
+	<fieldset>
+		<label for="window">Window</label>
+		<input id="window" type="checkbox" />
+		<label for="titlePreface">Prefix</label>
+		<input id="titlePreface" type="text" value="Startup Tabs" />
+	</fieldset>
+	<fieldset>
+		<input id="test" type="button" value=" Test " disabled />
+	</fieldset>
+	<fieldset>
+		<small>Append <i>#pin</i> to a bookmark url to open it as a pinned tab</small><br/>
+		<small>Example: <a href="https://github.com/igorlogius/startup-tabs/#pin">https://github.com/igorlogius/startup-tabs/#pin</a></small> 
+	</fieldset>
+	<script src="dialog.js"></script>
 </body>

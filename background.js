@@ -36,14 +36,25 @@ async function openStartupTabs(){
         if(openInNewWindow){
             const titlePreface = (await getFromStorage('string', 'titlePreface', extname)) + " : " ;
 
-            browser.windows.create({
-                url: [...urls],
+            const win = await browser.windows.create({
                 titlePreface
             });
+
+            let first = true;
+            for(const url of urls) {
+                browser.tabs.create({
+			'windowId': win.id,
+			'pinned': url.endsWith('#pin'),
+                        'url': url,
+                        'active': first
+                        });
+                first = false;
+            }
         }else{
             let first = true;
             for(const url of urls) {
                 browser.tabs.create({
+			'pinned': url.endsWith('#pin'),
                         'url': url,
                         'active': first
                         });
