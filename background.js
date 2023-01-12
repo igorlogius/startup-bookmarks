@@ -16,6 +16,7 @@ async function setToStorage(id, value) {
 
 async function openStartupTabs(){
 
+    let tmp;
     const bmId = await getFromStorage('string', 'folder', undefined);
     if(!bmId){
         return;
@@ -24,7 +25,7 @@ async function openStartupTabs(){
 
     //let already_open_urls = new Set((await browser.tabs.query({})).filter( t => t.url ).map( t => t.url));
 
-    try {
+    //try {
         const urls = new Set((await browser.bookmarks.getChildren(bmId))
                 .filter( child => child.url) // ignore sub folders
                 //.filter( child => !already_open_urls.has(child.url)) // ignore sub folders
@@ -40,16 +41,22 @@ async function openStartupTabs(){
                 titlePreface
             });
 
+	    const createdTabIds = new Set();
+
             let first = true;
             for(const url of urls) {
-                browser.tabs.create({
+                tmp = await browser.tabs.create({
 			'windowId': win.id,
 			'pinned': url.endsWith('#pin'),
                         'url': url,
                         'active': first
                         });
                 first = false;
+		createdTabIds.add(tmp.id);
             }
+	    // remove the inital about:newtab and everything else not part of the startup tabs
+	    const itabIds = (await browser.tabs.query({windowId: win.id})).filter(t => !createdTabIds.has(t.id)).map(t => t.id);
+	    browser.tabs.remove(itabIds);
         }else{
             let first = true;
             for(const url of urls) {
@@ -61,9 +68,9 @@ async function openStartupTabs(){
                 first = false;
             }
         }
-    }catch(e){
+    /*}catch(e){
         console.error(e);
-    }
+    }*/
 }
 
 browser.runtime.onStartup.addListener(openStartupTabs);
@@ -79,7 +86,7 @@ browser.browserAction.onClicked.addListener( () => {
 });
 */
 
-browser.runtime.onMessage.addListener( (req,sender, sendRes) => {
+browser.runtime.onMessage.addListener( (req /*,sender, sendRes*/) => {
         if(req.cmd === 'testStartupTabs') {
             openStartupTabs();
         }
@@ -88,7 +95,7 @@ browser.runtime.onMessage.addListener( (req,sender, sendRes) => {
 async function onInstalled(details) {
     if(details.reason === 'update') {
         let tmp = await getFromStorage('string',extname, '');
-        if(typeof tmp !== ''){
+        if(tmp !== ''){
             setToStorage('folder',tmp);
         }
     }

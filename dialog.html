@@ -6,34 +6,42 @@
 	body {
 		background-color: lightgray;
 	}
+	input {
+	}
 	#folder {
 		width:100%;
 		text-align:center;
 	}
 	#test {
-		width:100%;
 		text-align:center;
+		margin-left:25%;
+		width:50%;
+	}
+	#titlePreface {
+		text-align:center;
+	}
+	#window {
 	}
 	</style>
 </head>
 <body>
 	<fieldset>
 		<select id="folder">
-			<option value=''>Select Startup Folder</option>
+			<option value=''>Select Bookmark Folder</option>
 		</select>
 	</fieldset>
 	<fieldset>
-		<label for="window">Window</label>
+		<span>Open Window: </span>
 		<input id="window" type="checkbox" />
-		<label for="titlePreface">Prefix</label>
+		<span> +Prefix: </span>
 		<input id="titlePreface" type="text" value="Startup Tabs" />
 	</fieldset>
 	<fieldset>
-		<input id="test" type="button" value=" Test " disabled />
+		<small>Append <i>#pin</i> to a bookmark url to open it pinned</small><br/>
+		<small>Example: <a href="https://github.com/igorlogius/startup-tabs/#pin">https://github.com/igorlogius/startup-tabs/#pin</a></small> 
 	</fieldset>
 	<fieldset>
-		<small>Append <i>#pin</i> to a bookmark url to open it as a pinned tab</small><br/>
-		<small>Example: <a href="https://github.com/igorlogius/startup-tabs/#pin">https://github.com/igorlogius/startup-tabs/#pin</a></small> 
+		<input id="test" type="button" value=">> Quick Test <<" disabled />
 	</fieldset>
 	<script src="dialog.js"></script>
 </body>
