@@ -8,12 +8,6 @@ async function getFromStorage(type, id, fallback) {
 	return (typeof tmp[id] === type) ? tmp[id] : fallback;
 }
 
-async function setToStorage(id, value) {
-	let obj = {};
-	obj[id] = value
-	return browser.storage.local.set(obj);
-}
-
 async function openStartupTabs(){
 
 	let tmp;
@@ -30,7 +24,7 @@ async function openStartupTabs(){
 		return;
 	}
 
-	const openInNewWindow = await getFromStorage('boolean', 'window', true);
+	const openInNewWindow = await getFromStorage('boolean', 'window', false);
 
 	if(openInNewWindow){
 		const titlePreface = (await getFromStorage('string', 'titlePreface', extname)) + " : " ;
@@ -53,8 +47,8 @@ async function openStartupTabs(){
 		first = false;
 		createdTabIds.add(tmp.id);
 	}
-	// remove the inital about:newtab and everything else not part of the startup tabs
-	const itabIds = (await browser.tabs.query({windowId: winId})).filter(t => !createdTabIds.has(t.id)).map(t => t.id);
+	// remove  none http
+	const itabIds = (await browser.tabs.query({windowId: winId})).filter(t => !(/^https?:/.test(t.url) || createdTabIds.has(t.id))).map(t => t.id);
 	browser.tabs.remove(itabIds);
 }
 

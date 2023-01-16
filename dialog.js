@@ -99,7 +99,7 @@ async function initSelect() {
             last_val = k;
         }
     }
-    folder.value = last_val;
+    folders.value = last_val;
 }
 
 async function onLoad() {

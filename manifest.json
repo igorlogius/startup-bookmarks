@@ -17,8 +17,9 @@
     "page": "dialog.html"
   },
   "permissions": [
+    "tabs",
     "bookmarks",
     "storage"
   ],
-  "version": "1.7.8"
+  "version": "1.7.9"
 }
