@@ -1,46 +1,51 @@
 <!DOCTYPE html>
 <head>
-	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-	<style>
-	body {
-		background-color: lightgray;
-	}
-	input {
-	}
-	#folder {
-		width:100%;
-		text-align:center;
-	}
-	#test {
-		text-align:center;
-		margin-left:25%;
-		width:50%;
-	}
-	#titlePreface {
-		text-align:center;
-	}
-	#window {
-	}
-	</style>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  <style>
+    body {
+      background-color: lightgray;
+    }
+    input {
+    }
+    #folder {
+      width: 100%;
+      text-align: center;
+    }
+    #test {
+      text-align: center;
+      margin-left: 25%;
+      width: 50%;
+    }
+    #titlePreface {
+      text-align: center;
+    }
+    #window {
+    }
+  </style>
 </head>
 <body>
-	<fieldset>
-		<select id="folder">
-			<option value=''>Select Bookmark Folder</option>
-		</select>
-	</fieldset>
-	<fieldset>
-		<span>Open Window: </span>
-		<input id="window" type="checkbox" />
-		<span> +Prefix: </span>
-		<input id="titlePreface" type="text" value="Startup Tabs" />
-	</fieldset>
-	<fieldset>
-		<small>Append <i>#pin</i> to a bookmark url to open it pinned</small><br/>
-		<small>Example: <a href="https://github.com/igorlogius/startup-tabs/#pin">https://github.com/igorlogius/startup-tabs/#pin</a></small> 
-	</fieldset>
-	<fieldset>
-		<input id="test" type="button" value=">> Quick Test <<" disabled />
-	</fieldset>
-	<script src="dialog.js"></script>
+  <fieldset>
+    <select id="folder">
+      <option value="">Select Bookmark Folder</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <span>Open Window: </span>
+    <input id="window" type="checkbox" />
+    <span> +Prefix: </span>
+    <input id="titlePreface" type="text" value="Startup Tabs" />
+  </fieldset>
+  <fieldset>
+    <small>Append <i>#pin</i> to a bookmark url to open it pinned</small><br />
+    <small
+      >Example:
+      <a href="https://github.com/igorlogius/startup-tabs/#pin"
+        >https://github.com/igorlogius/startup-tabs/#pin</a
+      ></small
+    >
+  </fieldset>
+  <fieldset>
+    <input id="test" type="button" value=">> Quick Test <<" disabled />
+  </fieldset>
+  <script src="dialog.js"></script>
 </body>

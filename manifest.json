@@ -1,14 +1,13 @@
 {
   "author": "igorlogius",
   "background": {
-    "scripts": [
-      "background.js"
-    ]
+    "scripts": ["background.js"]
   },
   "icons": {
-	  "128": "icon.png"
+    "128": "icon.png"
   },
   "browser_action": {
+    "default_area": "navbar",
     "default_popup": "dialog.html"
   },
   "manifest_version": 2,
@@ -16,10 +15,6 @@
   "options_ui": {
     "page": "dialog.html"
   },
-  "permissions": [
-    "tabs",
-    "bookmarks",
-    "storage"
-  ],
-  "version": "1.7.9"
+  "permissions": ["tabs", "bookmarks", "storage"],
+  "version": "1.7.10"
 }
