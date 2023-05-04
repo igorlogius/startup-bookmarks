@@ -39,19 +39,19 @@ async function openStartupTabs() {
       (await browser.tabs.query({})).map((t) => t.url)
     );
   }
-  console.debug(already_open_urls);
+  //console.debug(already_open_urls);
   const winId = tmp.id;
 
   const createdTabIds = new Set();
 
   let first = true;
   for (const url of urls) {
-    if (!already_open_urls.has(url)) {
-      console.debug(url, " not in ", already_open_urls);
+    if (!already_open_urls.has(url.split("#pin")[0])) {
+      //console.debug(url, " not in ", already_open_urls);
       tmp = await browser.tabs.create({
         windowId: winId,
         pinned: url.endsWith("#pin"),
-        url: url,
+        url: url.split("#pin")[0],
         active: first,
       });
       first = false;
