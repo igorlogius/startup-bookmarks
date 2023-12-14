@@ -1,6 +1,6 @@
 Open a set of bookmarks as tabs on browser startup by simply selecting a bookmark folder which contains them. 
 
-<b>Demo:</b>
+<b>Short Demo Video:</b>
 
 https://user-images.githubusercontent.com/67047467/223754810-f4c0032f-0667-4739-9205-9bb0106f288e.mp4
 
