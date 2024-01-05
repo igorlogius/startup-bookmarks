@@ -11,7 +11,7 @@
     "default_popup": "dialog.html"
   },
   "manifest_version": 2,
-  "name": "Startup Tabs",
+  "name": "Startup Bookmarks",
   "options_ui": {
     "page": "dialog.html"
   },

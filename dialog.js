@@ -8,14 +8,6 @@ async function getFromStorage(type, id, fallback) {
   return typeof tmp[id] === type ? tmp[id] : fallback;
 }
 
-/*
-async function setToStorage(id, value) {
-  let obj = {};
-  obj[id] = value;
-  return browser.storage.local.set(obj);
-}
-*/
-
 function onChange(evt) {
   let id = evt.target.id;
   let el = document.getElementById(id);
@@ -48,8 +40,6 @@ function onChange(evt) {
     .then((obj) => {
       let el = document.getElementById(id);
       let val = obj[id];
-
-      console.log(id, val);
 
       if (typeof val !== "undefined") {
         if (el.type === "checkbox") {
@@ -90,7 +80,6 @@ async function initSelect() {
   let tmp = await getFromStorage("string", "folder", "");
   let last_val = "";
   for (const [k, v] of out) {
-    //console.debug(k, v.title);
     folders.add(new Option("-".repeat(v.depth) + " " + v.title, k));
     if (k === tmp) {
       last_val = k;
@@ -117,7 +106,7 @@ async function onLoad() {
   });
   testbtn.addEventListener("click", function () {
     // send msg to background script
-    browser.runtime.sendMessage({ cmd: "testStartupTabs" });
+    browser.runtime.sendMessage({ cmd: "test" });
   });
 }
 
