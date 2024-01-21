@@ -41,26 +41,24 @@ async function openStartupBookmarks() {
   }
   const winId = tmp.id;
 
-  const createdTabIds = new Set();
-
   let first = true;
   for (const url of urls) {
     if (!already_open_urls.has(url.split("#pin")[0])) {
-      tmp = await browser.tabs.create({
-        windowId: winId,
-        pinned: url.endsWith("#pin"),
-        url: url.split("#pin")[0],
-        active: first,
-      });
-      first = false;
-      createdTabIds.add(tmp.id);
+      try {
+        const tmpurl = new URL(url);
+        tmp = await browser.tabs.create({
+          windowId: winId,
+          pinned: url.endsWith("#pin"),
+          url: tmpurl.toString().split("#pin")[0],
+          active: first,
+        });
+        first = false;
+      } catch (e) {
+        // ignore invalid urls and
+        // about: pages can not be created
+      }
     }
   }
-  // remove  none http
-  const itabIds = (await browser.tabs.query({ windowId: winId }))
-    .filter((t) => !(/^https?:/.test(t.url) || createdTabIds.has(t.id)))
-    .map((t) => t.id);
-  browser.tabs.remove(itabIds);
 }
 
 browser.runtime.onStartup.addListener(openStartupBookmarks);
