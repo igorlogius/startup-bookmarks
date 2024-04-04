@@ -1,8 +1,10 @@
 {
   "author": "igorlogius",
+  "homepage_url": "https://github.com/igorlogius",
   "background": {
     "scripts": ["background.js"]
   },
+  "description": "Open a set of bookmarks as tabs on browser startup by simply selecting a bookmark folder which contains them",
   "icons": {
     "128": "icon.png"
   },
@@ -16,5 +18,5 @@
     "page": "dialog.html"
   },
   "permissions": ["tabs", "bookmarks", "storage"],
-  "version": "1.7.13"
+  "version": "1.7.14"
 }

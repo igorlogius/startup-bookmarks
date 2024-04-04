@@ -46,7 +46,7 @@ async function openStartupBookmarks() {
     if (!already_open_urls.has(url.split("#pin")[0])) {
       try {
         const tmpurl = new URL(url);
-        tmp = await browser.tabs.create({
+        await browser.tabs.create({
           windowId: winId,
           pinned: url.endsWith("#pin"),
           url: tmpurl.toString().split("#pin")[0],
