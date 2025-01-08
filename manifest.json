@@ -18,5 +18,5 @@
     "page": "dialog.html"
   },
   "permissions": ["tabs", "bookmarks", "storage"],
-  "version": "1.7.14"
+  "version": "1.7.15"
 }

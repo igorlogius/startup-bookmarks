@@ -34,7 +34,7 @@ function onChange(evt) {
   browser.storage.local.set(obj).catch(console.error);
 }
 
-["folder", "window", "titlePreface"].map((id) => {
+["folder"].map((id) => {
   browser.storage.local
     .get(id)
     .then((obj) => {
