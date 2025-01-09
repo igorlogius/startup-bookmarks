@@ -6,7 +6,7 @@ Open a set of bookmarks as tabs on browser startup by simply selecting a bookmar
 
 <b>Short Demo Video:</b>
 
-https://private-user-images.githubusercontent.com/67047467/400958059-6fd73f14-29cf-4463-a0d0-58b391e73ccb.mp4
+https://github.com/user-attachments/assets/f6d3c76e-e0c8-4105-a011-40a49a267557
 
 <b>Usage:</b>
 <ol>
