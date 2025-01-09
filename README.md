@@ -11,8 +11,7 @@ https://github.com/user-attachments/assets/f6d3c76e-e0c8-4105-a011-40a49a267557
 <b>Usage:</b>
 <ol>
   <li>click the toolbar icon</li>
-  <li>select a startup folder</li>
-  <li>(optional) choose if opened in a new window (with prefix)</li>
-  <li>(optional) append "#pin" to bookmark urls to open them pinned</li>
-  <li>click the Test button to make sure its how you want it :-)</li>
+  <li>select the bookmark folder</li>
+  <li>click the "Quick Test" button</li>
 </ol>
+    
